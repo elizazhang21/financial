@@ -1,0 +1,123 @@
+/* customize style layouts */
+
+/* color definitions */
+.main-text.text-dark {
+  color: #303030;
+}
+
+.main-text.text-brown {
+  color: #6A6061;
+}
+
+.main-text.text-gold {
+  color: #D1BF9E;
+}
+
+.main-text.text-gray {
+  color: #DCDFE4;
+}
+
+.main-text.text-blue {
+  color: #BCCCE4;
+}
+
+.main-dark {
+  background-color: #303030;
+}
+
+.main-brown {
+  background-color: #6A6061;
+}
+
+.main-gold {
+  background-color: #D1BF9E;
+}
+
+.main-gray {
+  background-color: #DCDFE4;
+}
+
+.main-blue {
+  background-color: #BCCCE4;
+}
+
+
+/* general layout settings */
+html {
+  min-height: 100%;
+  background-color: #FCFCFC;
+}
+
+header {
+  height: 40px;
+}
+
+main {
+  min-height: 100%;
+  padding: 2% 2% 2% 2%;
+}
+
+nav {
+  box-shadow: none !important;
+}
+
+
+/* navigation bar */
+.nav-wrapper {
+  padding: 0 2% 0 2%;
+  background-color: #303030;
+}
+
+.nav-wrapper > ul > li > a:hover,
+.nav-wrapper > ul > li > a:focus,
+.nav-wrapper > ul > li > a:active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+
+
+
+
+.custom-menu {
+  padding: 0 2% 0 2%;
+  height: 40px;
+  background-color: #303030;
+  vertical-align: middle;
+}
+
+.pure-menu-heading {
+  text-align: center;
+  color: #DCDFE4;
+  font-size: 18px;
+  padding: 9.5px 0 9.5px 0;
+}
+
+/*.pure-menu-item,*/
+.pure-menu-item > a {
+  text-align: center;
+  vertical-align: middle !important;
+  width: 150px;
+  color: #DCDFE4 !important;
+  font-size: 18px;
+  padding: 9.5px 0 9.5px 0;
+  text-transform: uppercase;
+}
+
+.pure-menu-item > a:hover,
+.pure-menu-item > a:focus {
+  background-color: #DCDFE4;
+  color: #303030 !important;
+}
+
+
+
+.home-menu a {
+  color: #6FBEF3;
+}
+.home-menu li a:hover,
+.home-menu li a:focus {
+  background: none;
+  border: none;
+  color: #AECFE5;
+}

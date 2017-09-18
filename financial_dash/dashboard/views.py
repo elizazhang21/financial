@@ -3,4 +3,4 @@ from django.http import HttpResponse
 
 
 def dashboard_index(request):
-    return HttpResponse('dashboard index page')
+    return render(request, 'dashboard_index.html')

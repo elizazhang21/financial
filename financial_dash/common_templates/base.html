@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- import css files -->
+  {% load static %}
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/materialize.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
+  {% block extra_css %}{% endblock %}
+
+  <title>{% block title %}Index{% endblock %} - Personal Financial Statement</title>
+</head>
+
+<body>
+  <!-- header part -->
+  <header>
+    <div class="navbar-fixed">
+      <nav>
+        <div class="nav-wrapper">
+          <a href="/" class="brand-logo main-text text-gray">Financial</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/dashboard/"><i class="material-icons left">view_compact</i>Dashboard</a></li>
+            <li><a href="#" class="active"><i class="material-icons left">assessment</i>Analytics</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- body part -->
+  <main>
+  {% block content %}{% endblock %}
+  </main>
+
+
+  <!-- footer part -->
+  <footer >
+  </footer>
+
+  <!-- import js files -->
+  <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</body>
+</html>
