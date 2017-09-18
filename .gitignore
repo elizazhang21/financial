@@ -1,8 +1,10 @@
 # init level
-*.xlsx
-*.sh
-
 *.pyc
 *.ipynb
 __pycache__/
 .ipynb_checkpoints/
+
+# specific data files
+*.xlsx
+*.sh
+records/
