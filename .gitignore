@@ -6,8 +6,3 @@
 *.ipynb
 __pycache__/
 .ipynb_checkpoints/
-
-
-# specific files
-db_models.py
-model_structure.md
