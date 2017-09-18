@@ -1,5 +1,6 @@
 import logging
 import sys
+import datetime
 
 
 class Logger(object):
@@ -23,3 +24,8 @@ class Logger(object):
 
     def error(self, msg):
         self.logger.error(msg)
+
+
+# path
+year_month = datetime.date.today().strftime('%Y%m')
+record_name = 'records/{}.xlsx'.format(year_month)

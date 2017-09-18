@@ -27,8 +27,8 @@ admin.site.register(models.InvestmentUSD, InvestmentUSD)
 
 
 class DailyTransaction(admin.ModelAdmin):
-    list_display = ('txn_date', 'amount', 'currency', 'txn_category', 'description')
-    search_fields = ['txn_date', 'txn_category']
+    list_display = ('txn_date', 'bank_acct', 'amount', 'currency', 'txn_category', 'description')
+    search_fields = ['txn_date', 'txn_category', 'bank_acct']
 admin.site.register(models.DailyTransaction, DailyTransaction)
 
 
