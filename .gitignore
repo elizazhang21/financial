@@ -1,0 +1,12 @@
+# init level
+*.xlsx
+*.sh
+
+*.pyc
+*.ipynb
+__pycache__/
+.ipynb_checkpoints/
+
+
+# specific files
+db_models.py
