@@ -1,7 +1,5 @@
-from db_session import start_session, close_session
+from db_session import start_session, close_session, logger
 from db_models import model_list
-from constants import Logger
-logger = Logger()
 
 
 def create_table(engine, model):
