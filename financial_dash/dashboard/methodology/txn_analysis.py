@@ -23,5 +23,3 @@ class Logger(object):
 
     def error(self, msg):
         self.logger.error(msg)
-
-logger = Logger()
