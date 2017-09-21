@@ -13,6 +13,7 @@ class Balance(object):
         }
 
     def get_last_balance(self, currency):
+        logger.info('Fetching latest balance data: {}'.format(currency))
         balance = pd.DataFrame(list(
                 self.balance_model[currency].objects.values())
             ).sort_values(
@@ -26,5 +27,17 @@ class Balance(object):
     def get_total_value(self, balance):
         return balance['balance'].sum().round(2)
 
-    def plot_last_balance(self, currency):
+    def get_all_balance(self, currency):
+        logger.info('Fetching all balance data: {}'.format(currency))
+        balance = pd.DataFrame(list(
+                self.balance_model[currency].objects.values())
+            ).sort_values(
+                ['account', 'observation_date', 'last_update']
+            ).drop_duplicates(['account', 'observation_date'], keep='last')
+
+        # choose only week end entries
+
+        return balance
+
+    def plot_last_balance(self, balance):
         pass

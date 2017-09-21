@@ -1,5 +1,5 @@
-from .constants import logger
-from .methodology.bal_analysis import Balance
+from ..constants import logger
+from bal_analysis import Balance
 
 
 def get_balance_analysis():
