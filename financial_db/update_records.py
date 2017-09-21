@@ -1,4 +1,3 @@
-import sys
 import pandas as pd
 import datetime
 from db_session import start_session, close_session, logger
