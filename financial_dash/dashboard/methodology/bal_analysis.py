@@ -11,6 +11,10 @@ class Balance(object):
             'CNY': BalanceCNY,
             'USD': BalanceUSD,
         }
+        self.balance_last = {
+            'CNY': self.get_last_balance('CNY'),
+            'USD': self.get_last_balance('USD'),
+        }
 
     def get_last_balance(self, currency):
         logger.info('Fetching latest balance data: {}'.format(currency))
