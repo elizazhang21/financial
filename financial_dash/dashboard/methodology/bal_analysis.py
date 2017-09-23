@@ -24,9 +24,6 @@ class Balance(object):
         balance['pct'] = balance['balance'] / balance['balance'].sum()
         return balance[['account', 'observation_date', 'balance', 'pct']]
 
-    def get_total_value(self, balance):
-        return balance['balance'].sum().round(2)
-
     def get_all_balance(self, currency):
         logger.info('Fetching all balance data: {}'.format(currency))
         balance = pd.DataFrame(list(
@@ -38,6 +35,9 @@ class Balance(object):
         # choose only week end entries
 
         return balance
+
+    def calculate_total_value(self, balance):
+        return balance['balance'].sum().round(2)
 
     def plot_last_balance(self, balance):
         pass
