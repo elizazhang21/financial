@@ -7,8 +7,9 @@ from .txn_analysis import Transactions
 
 def get_balance_analysis():
     # get balance analysis
-    logger.info('Analyzing asset balances......')
     balance = Balance()
+    logger.info('Analyzing asset balances')
+
     bal_dict = {}
     for currency in ['CNY', 'USD']:
         bal_dict[currency] = {}
@@ -21,9 +22,8 @@ def get_balance_analysis():
 
 def get_transaction_analysis():
     # get transaction analysis
-    logger.info('Analyzing transaction records......')
     txn = Transactions()
-    txn_dict = {}
+    logger.info('Analyzing transaction records')
 
     # get total number and whether payments balanced
     total = txn.calculate_total_consumption(txn.records)
@@ -34,10 +34,12 @@ def get_transaction_analysis():
     category = txn.calculate_category_consumption(txn.records, total, detailed=False)
 
     # format dictionary
+    txn_dict = {}
     txn_dict['total'] = total.to_dict('index')
     txn_dict['payment_balance'] = payment_balance
     txn_dict['category_detail'] = {}
     txn_dict['category'] = {}
+
     for currency in ['CNY', 'USD']:
         txn_dict['category_detail'][currency] = category_detail.loc[
                 (currency, datetime.date.today().strftime('%Y-%m'))

@@ -13,7 +13,7 @@ class Transactions(object):
         self.records = self.get_txn_records()
 
     def get_txn_records(self):
-        logger.info('Fetching all transaction records......')
+        logger.info('Fetching all transaction records')
         records = pd.DataFrame(list(
                 DailyTransaction.objects.values())
             ).sort_values(
