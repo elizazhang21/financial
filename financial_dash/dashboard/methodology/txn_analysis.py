@@ -27,19 +27,18 @@ class Transactions(object):
         total.rename(columns={0: 'total'}, inplace=True)
         return total
 
-    def calculate_category_consumption(self, records, detailed=True):
+    def calculate_category_consumption(self, records, total, detailed=True):
         if not detailed:
             records = records.copy()
             records['txn_category'] = records['txn_category'].apply(
                 lambda x: x if x in self.important_categories else 'Other'
             )
 
-        category = records.groupby(['currency', 'txn_category']).apply(lambda x: x['amount'].sum())
+        category = records.groupby(['currency', 'txn_category', 'month']).apply(lambda x: x['amount'].sum())
         category = category.reset_index('txn_category')
         category.rename(columns={0: 'amount'}, inplace=True)
-        return category
 
-    def calculate_percentage(self, category, total):
+        # get percentage
         df = category.merge(total, left_index=True, right_index=True, how='left')
         df['pct'] = df['amount'] / df['total']
         return df

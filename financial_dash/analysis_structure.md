@@ -28,6 +28,6 @@
 
 1. 5 cards: CNY/USD x balance/investment, summary table
 2. 5 graphs: proportion of each account
-3. 1 card + 1 graph: current month detailed spending, pie/ring chart
-4. 1 card + 1 graph: monthly spending, stacked line chart
+3. 1 card + 1 graph: current month USD detailed spending, pie/ring chart
+4. 1 card + 1 graph: monthly USD spending, stacked line chart
 5. data table: detailed transaction entries

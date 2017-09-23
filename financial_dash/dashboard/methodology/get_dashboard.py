@@ -23,14 +23,13 @@ def get_transaction_analysis():
     txn = Transactions()
     txn_dict = {}
 
-    # get total number, detailed numbes, if payments balanced
+    # get total number and whether payments balanced
     total = txn.calculate_total_consumption(txn.records)
-    category_detail = txn.calculate_category_consumption(txn.records, detailed=True)
     payment_balance = txn.check_payments(txn.records)
 
-    # general category with percentage
-    df_category = txn.calculate_category_consumption(txn.records, detailed=False)
-    category = txn.calculate_percentage(df_category, total)
+    # consumption by category
+    category_detail = txn.calculate_category_consumption(txn.records, total, detailed=True)
+    category = txn.calculate_category_consumption(txn.records, total, detailed=False)
 
     # format dictionary
     txn_dict['total'] = total.to_dict('index')
@@ -38,7 +37,9 @@ def get_transaction_analysis():
     txn_dict['category_detail'] = {}
     txn_dict['category'] = {}
     for currency in ['CNY', 'USD']:
-        txn_dict['category_detail'][currency] = category_detail.loc[currency].set_index('txn_category').to_dict('index')
-        txn_dict['category'][currency] = category.loc[currency].set_index('txn_category').to_dict('index')
+        txn_dict['category_detail'][currency] = category_detail.loc[
+                (currency, datetime.date.today().strftime('%Y-%m'))
+            ].set_index('txn_category').to_dict('index')
+        txn_dict['category'][currency] = category.loc[currency].reset_index().to_dict('record')
 
     return txn_dict
