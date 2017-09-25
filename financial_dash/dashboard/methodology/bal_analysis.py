@@ -25,7 +25,7 @@ class Balance(object):
             ).drop_duplicates('account', keep='last')
 
         # calculate total value & percentage
-        balance['pct'] = balance['balance'] / balance['balance'].sum()
+        balance['pct'] = balance['balance'] / balance['balance'].sum() * 100
         return balance[['account', 'observation_date', 'balance', 'pct']]
 
     def get_all_balance(self, currency):
@@ -41,7 +41,7 @@ class Balance(object):
         return balance
 
     def calculate_total_value(self, balance):
-        return balance['balance'].sum().round(2)
+        return balance['balance'].sum()
 
     def plot_last_balance(self, balance):
         pass

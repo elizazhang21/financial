@@ -24,10 +24,13 @@
 
 ##### Investment analysis
 
+1. total value
+2. components proportion
+
 ##### Dashboard layout
 
-1. 5 cards: CNY/USD x balance/investment, summary table
-2. 5 graphs: proportion of each account
+1. 4 cards: CNY/USD x balance/investment
+2. 4 graphs: proportion of each account
 3. 1 card + 1 graph: current month USD detailed spending, pie/ring chart
 4. 1 card + 1 graph: monthly USD spending, stacked line chart
 5. data table: detailed transaction entries

@@ -9,11 +9,101 @@ Dashboard
 
 {% block content %}
 
+<!-- balance analysis -->
+<div class="row">
+  <!-- USD balance -->
+  <div class="col s6 m3 l3">
+    <h5>USD Balance</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>As of date</th>
+        <td>{{ bal.USD.obs_date|date:"M d, Y" }}</td><td></td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total value</th>
+        <td>&#36; {{ bal.USD.tv }}</td><td></td>
+      </tr>
+      {% for entry in bal.USD.data %}
+      <tr>
+        <td>{{ entry.account }}</td>
+        <td>&#36; {{ entry.balance }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- USD investment -->
+  <div class="col s6 m3 l3">
+    <h5>USD Investment</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>As of date</th>
+        <td>{{ inv.USD.obs_date|date:"M d, Y" }}</td><td></td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total value</th>
+        <td>&#36; {{ inv.USD.tv }}</td><td></td>
+      </tr>
+      {% for entry in inv.USD.data %}
+      <tr>
+        <td>{{ entry.account }}</td>
+        <td>&#36; {{ entry.balance }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- CNY balance -->
+  <div class="col s6 m3 l3">
+    <h5>CNY Balance</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>As of date</th>
+        <td>{{ bal.CNY.obs_date|date:"M d, Y" }}</td><td></td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total value</th>
+        <td>&#165; {{ bal.CNY.tv }}</td><td></td>
+      </tr>
+      {% for entry in bal.CNY.data %}
+      <tr>
+        <td>{{ entry.account }}</td>
+        <td>&#165; {{ entry.balance }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- CNY investment -->
+  <div class="col s6 m3 l3">
+    <h5>CNY Investment</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>As of date</th>
+        <td>{{ inv.CNY.obs_date|date:"M d, Y" }}</td><td></td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total value</th>
+        <td>&#165; {{ inv.CNY.tv }}</td><td></td>
+      </tr>
+      {% for entry in inv.CNY.data %}
+      <tr>
+        <td>{{ entry.account }}</td>
+        <td>&#165; {{ entry.balance }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</div><hr />
 
 
-<br>
 
-{{ txn.category_detail.USD }}
+
 
 
 

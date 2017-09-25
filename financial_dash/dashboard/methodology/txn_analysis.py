@@ -40,7 +40,7 @@ class Transactions(object):
 
         # get percentage
         df = category.merge(total, left_index=True, right_index=True, how='left')
-        df['pct'] = df['amount'] / df['total']
+        df['pct'] = df['amount'] / df['total'] * 100
         return df
 
     def check_payments(self, records):

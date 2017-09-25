@@ -2,6 +2,7 @@ import pandas as pd
 import datetime
 from ..constants import logger
 from .bal_analysis import Balance
+from .inv_analysis import Investment
 from .txn_analysis import Transactions
 
 
@@ -18,6 +19,21 @@ def get_balance_analysis():
         bal_dict[currency]['obs_date'] = balance.balance_last[currency]['observation_date'].min()
 
     return bal_dict
+
+
+def get_investment_analysis():
+    # get investment analysis
+    investment = Investment()
+    logger.info('Analyzing investment balances')
+
+    inv_dict = {}
+    for currency in ['CNY', 'USD']:
+        inv_dict[currency] = {}
+        inv_dict[currency]['data'] = investment.investment_last[currency].to_dict('record')
+        inv_dict[currency]['tv'] = investment.calculate_total_value(investment.investment_last[currency])
+        inv_dict[currency]['obs_date'] = investment.investment_last[currency]['observation_date'].min()
+
+    return inv_dict
 
 
 def get_transaction_analysis():
