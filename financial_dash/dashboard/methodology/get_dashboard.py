@@ -52,6 +52,7 @@ def get_transaction_analysis():
     # format dictionary
     txn_dict = {}
     txn_dict['total'] = total.to_dict('index')
+    txn_dict['month'] = txn.records['month'].unique()[0]
     txn_dict['payment_balance'] = payment_balance
     txn_dict['category_detail'] = {}
     txn_dict['category'] = {}

@@ -48,8 +48,8 @@ Dashboard
       {% for entry in inv.USD.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#36; {{ entry.balance }}</th>
-        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+        <td>&#36; {{ entry.balance }}</td>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
     </table>
@@ -70,8 +70,8 @@ Dashboard
       {% for entry in bal.CNY.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#165; {{ entry.balance }}</th>
-        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+        <td>&#165; {{ entry.balance }}</td>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
     </table>
@@ -92,8 +92,8 @@ Dashboard
       {% for entry in inv.CNY.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#165; {{ entry.balance }}</th>
-        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+        <td>&#165; {{ entry.balance }}</td>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
     </table>
@@ -103,7 +103,53 @@ Dashboard
 
 
 
+<!-- transaction analysis -->
+<div class="row">
+  <!-- USD transaction -->
+  <div class="col s12 m6 l6">
+    <h5>USD Transaction Summary</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>Month</th>
+        <td colspan="2">{{ txn.month }}</td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total amount</th>
+        <td colspan="2">{{ txn.total.USD.total }}</td>
+      </tr>
+      {% for entry in txn.category.USD %}
+      <tr>
+        <td>{{ entry.txn_category }}</td>
+        <td>&#36; {{ entry.amount|floatformat:2 }}</td>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
 
+  <!-- CNY transaction -->
+  <div class="col s12 m6 l6">
+    <h5>CNY Transaction Summary</h5><hr />
+    <table class="highlight">
+      <tr>
+        <th>Month</th>
+        <td colspan="2">{{ txn.month }}</td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total amount</th>
+        <td colspan="2">{{ txn.total.CNY.total }}</td>
+      </tr>
+      {% for entry in txn.category.CNY %}
+      <tr>
+        <td>{{ entry.txn_category }}</td>
+        <td>&#165; {{ entry.amount|floatformat:2 }}</td>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</div><hr/>
 
 
 
