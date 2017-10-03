@@ -19,6 +19,7 @@ def write_records(session, records, model):
 
     logger.info('Writing to database......')
     session.bulk_insert_mappings(model, records.to_dict('record'))
+    session.commit()
 
 
 if __name__ == '__main__':
@@ -26,6 +27,7 @@ if __name__ == '__main__':
     session, engine = start_session()
     for model in [DailyTransaction, InvestmentTransfer, Income]:
         records = get_records(model.__tablename__)
-        write_records(session, records, model)
+        if not records.empty:
+            write_records(session, records, model)
 
     close_session(session)
