@@ -115,7 +115,7 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total amount</th>
-        <td colspan="2">{{ txn.total.USD.total }}</td>
+        <td colspan="2">&#36; {{ txn.total.USD.total|default:0 }}</td>
       </tr>
       {% for entry in txn.category.USD %}
       <tr>
@@ -137,7 +137,7 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total amount</th>
-        <td colspan="2">{{ txn.total.CNY.total }}</td>
+        <td colspan="2">&#165; {{ txn.total.CNY.total|default:0 }}</td>
       </tr>
       {% for entry in txn.category.CNY %}
       <tr>

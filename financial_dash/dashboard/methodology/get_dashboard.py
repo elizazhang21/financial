@@ -52,15 +52,20 @@ def get_transaction_analysis():
     # format dictionary
     txn_dict = {}
     txn_dict['total'] = total.to_dict('index')
-    txn_dict['month'] = txn.records['month'].unique()[0]
+    txn_dict['month'] = txn.records['month'].max()
     txn_dict['payment_balance'] = payment_balance
     txn_dict['category_detail'] = {}
     txn_dict['category'] = {}
 
     for currency in ['CNY', 'USD']:
-        txn_dict['category_detail'][currency] = category_detail.loc[
-                (currency, datetime.date.today().strftime('%Y-%m'))
-            ].set_index('txn_category').to_dict('index')
-        txn_dict['category'][currency] = category.loc[currency].reset_index().to_dict('record')
+        try:
+            txn_dict['category_detail'][currency] = category_detail.loc[
+                    (currency, datetime.date.today().strftime('%Y-%m'))
+                ].set_index('txn_category').to_dict('index')
+            txn_dict['category'][currency] = category.loc[
+                    (currency, datetime.date.today().strftime('%Y-%m'))
+                ].reset_index().to_dict('record')
+        except KeyError:
+            logger.warning('No transaction records {}'.format(currency))
 
     return txn_dict

@@ -15,8 +15,9 @@ class Transactions(object):
     def get_txn_records(self):
         logger.info('Fetching all transaction records')
         records = pd.DataFrame(list(
-                DailyTransaction.objects.values())
-            ).sort_values(
+            DailyTransaction.objects.filter(
+                txn_date__gte=pd.Timestamp('today').date().replace(day=1)
+            ).values())).sort_values(
                 ['txn_date', 'bank_acct', 'txn_category']
             )[['txn_date', 'bank_acct', 'amount', 'currency', 'txn_category']]
         records['month'] = records['txn_date'].apply(lambda x: x.strftime('%Y-%m'))
