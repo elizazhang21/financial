@@ -4,18 +4,28 @@ from constants import logger
 
 from db_session import start_session, close_session
 from db_models import InvestmentCNY, InvestmentUSD
-from scrapers import fistrade
+from scrapers import firstrade
 
 
 def get_investment(currency):
     logger.info('Getting {} investment balance'.format(currency))
 
     if currency == 'USD':
-        pass
+        inv_firstrade = firstrade.get_balance('Troy')
+        inv_firstrade_dc = firstrade.get_balance('Doris')
+        df = pd.DataFrame([{
+                'account': 'Firstrade',
+                'balance': inv_firstrade,
+            }, {
+                'account': 'Firstrade_DC',
+                'balance': inv_firstrade_dc * 6.0 / 7.0,
+            }])
     elif currency == 'CNY':
         pass
 
-    return
+    # format dates
+    df['observation_date'] = pd.Timestamp('today').date()
+    return df
 
 
 def write_investment(session, balance, model):
