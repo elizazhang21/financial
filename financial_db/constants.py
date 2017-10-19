@@ -25,6 +25,7 @@ class Logger(object):
     def error(self, msg):
         self.logger.error(msg)
 
+logger = Logger()
 
 # path
 year_month = datetime.date.today().strftime('%Y%m')

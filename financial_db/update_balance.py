@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
-from db_session import start_session, close_session, logger
+from constants import logger
+from db_session import start_session, close_session
 from db_models import (
     DailyTransaction, InvestmentTransfer, Income,
     BalanceCNY, BalanceUSD

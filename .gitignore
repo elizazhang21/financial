@@ -9,3 +9,5 @@ __pycache__/
 *.xlsx
 *.sh
 records/
+scrapers/
+constants_private.py

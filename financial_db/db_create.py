@@ -1,4 +1,5 @@
-from db_session import start_session, close_session, logger
+from constants import logger
+from db_session import start_session, close_session
 from db_models import model_list
 
 

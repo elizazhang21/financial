@@ -1,8 +1,8 @@
 import pandas as pd
 import datetime
-from db_session import start_session, close_session, logger
+from constants import record_name, logger
+from db_session import start_session, close_session
 from db_models import DailyTransaction, InvestmentTransfer, Income
-from constants import record_name
 
 
 def get_records(db_name):
@@ -13,11 +13,11 @@ def get_records(db_name):
 
 
 def write_records(session, records, model):
-    logger.info('Deleting outdated entries......')
+    logger.info('Deleting outdated entries')
     session.query(model).filter(
         model.txn_date >= datetime.date.today().replace(day=1)).delete()
 
-    logger.info('Writing to database......')
+    logger.info('Writing to database: {}'.format(model.__tablename__))
     session.bulk_insert_mappings(model, records.to_dict('record'))
     session.commit()
 

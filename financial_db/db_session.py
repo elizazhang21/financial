@@ -1,7 +1,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from constants import Logger
-logger = Logger()
+from constants import logger
 
 
 def start_session():
