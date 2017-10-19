@@ -12,7 +12,7 @@ Dashboard
 <!-- balance analysis -->
 <div class="row">
   <!-- USD balance -->
-  <div class="col s6 m3 l3">
+  <div class="col s12 m3 l3">
     <h5>USD Balance</h5><hr />
     <table class="highlight">
       <tr>
@@ -34,7 +34,7 @@ Dashboard
   </div>
 
   <!-- USD investment -->
-  <div class="col s6 m3 l3">
+  <div class="col s12 m3 l3">
     <h5>USD Investment</h5><hr />
     <table class="highlight">
       <tr>
@@ -56,7 +56,7 @@ Dashboard
   </div>
 
   <!-- CNY balance -->
-  <div class="col s6 m3 l3">
+  <div class="col s12 m3 l3">
     <h5>CNY Balance</h5><hr />
     <table class="highlight">
       <tr>
@@ -78,7 +78,7 @@ Dashboard
   </div>
 
   <!-- CNY investment -->
-  <div class="col s6 m3 l3">
+  <div class="col s12 m3 l3">
     <h5>CNY Investment</h5><hr />
     <table class="highlight">
       <tr>
@@ -102,10 +102,8 @@ Dashboard
 </div><hr />
 
 
-
-<!-- transaction analysis -->
+<!-- USD transaction -->
 <div class="row">
-  <!-- USD transaction -->
   <div class="col s12 m6 l6">
     <h5>USD Transaction Summary</h5><hr />
     <table class="highlight">
@@ -127,7 +125,23 @@ Dashboard
     </table>
   </div>
 
-  <!-- CNY transaction -->
+  {% if txn.category.USD %}
+  <div class="col s12 m6 l6">
+    <ul class="tabs">
+      <li class="tab col s3"><a href="#txn-plot-USD-category">by category</a></li>
+      <li class="tab col s3"><a href="#txn-plot-USD-category-detail">by detail</a></li>
+      <li class="tab col s3"><a href="#txn-plot-USD-historical">historical</a></li>
+    </ul>
+
+    <div id="txn-plot-USD-category" class="txn-plot"></div>
+    <div id="txn-plot-USD-category-detail" class="txn-plot"></div>
+    <div id="txn-plot-USD-historical" class="txn-plot"></div>
+  </div>
+  {% endif %}
+</div><hr/>
+
+<!-- CNY transaction -->
+<div class="row">
   <div class="col s12 m6 l6">
     <h5>CNY Transaction Summary</h5><hr />
     <table class="highlight">
@@ -149,15 +163,45 @@ Dashboard
     </table>
   </div>
 
+  {% if txn.category.CNY %}
+  <div class="col s12 m6 l6">
+    <ul class="tabs">
+      <li class="tab col s3"><a href="#txn-plot-CNY-category">by category</a></li>
+      <li class="tab col s3"><a href="#txn-plot-CNY-category-detail">by detail</a></li>
+      <li class="tab col s3"><a href="#txn-plot-CNY-historical">historical</a></li>
+    </ul>
+
+    <div id="txn-plot-CNY-category" class="txn-plot"></div>
+    <div id="txn-plot-CNY-category-detail" class="txn-plot"></div>
+    <div id="txn-plot-CNY-historical" class="txn-plot"></div>
+  </div>
+  {% endif %}
 </div><hr/>
 
 
 
+
+<div id="plot-test" style="width: 400px; height: 400px;"></div>
 
 {% endblock %}
 
 
 {% block extra_js %}
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<!-- <script src="https://code.highcharts.com/stock/modules/exporting.js"></script> -->
+<script type="text/javascript" src="{% static 'js/plot.js' %}"></script>
+<script type="text/javascript">
+  {% if txn.category.USD %}
+    pie_charts('txn-plot-USD-category', {{ txn_plot.USD|default:'[]'|safe }}, 'USD Transaction By Category');
+    pie_charts('txn-plot-USD-category-detail', {{ txn_plot_detail.USD|default:'[]'|safe }}, 'USD Transaction By Detailed Category');
+    pct_area('txn-plot-USD-historical', {{ txn_hist_plot.USD.data_series|safe }}, {{ txn_hist_plot.USD.x_axis|safe }}, 'USD Transaction History')
+  {% endif %}
+  {% if txn.category.CNY %}
+    pie_charts('txn-plot-CNY-category', {{ txn_plot.CNY|default:'[]'|safe }}, 'CNY Transaction By Category');
+    pie_charts('txn-plot-CNY-category-detail', {{ txn_plot_detail.CNY|default:'[]'|safe }}, 'CNY Transaction By Detailed Category');
+    pct_area('txn-plot-CNY-historical', {{ txn_hist_plot.CNY.data_series|safe }}, {{ txn_hist_plot.CNY.x_axis|safe }}, 'CNY Transaction History')
+  {% endif %}
+
+  
+</script>
 {% endblock %}

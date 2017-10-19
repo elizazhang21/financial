@@ -1,5 +1,4 @@
 import pandas as pd
-import datetime
 from ..constants import logger
 from .bal_analysis import Balance
 from .inv_analysis import Investment
@@ -41,31 +40,30 @@ def get_transaction_analysis():
     txn = Transactions()
     logger.info('Analyzing transaction records')
 
-    # get total number and whether payments balanced
-    total = txn.calculate_total_consumption(txn.records)
-    payment_balance = txn.check_payments(txn.records)
-
     # consumption by category
-    category_detail = txn.calculate_category_consumption(txn.records, total, detailed=True)
-    category = txn.calculate_category_consumption(txn.records, total, detailed=False)
+    category_detail = txn.calculate_category_consumption(txn.records, detailed=True)
+    category = txn.calculate_category_consumption(txn.records, detailed=False)
 
     # format dictionary
     txn_dict = {}
-    txn_dict['total'] = total.to_dict('index')
+    txn_dict['total'] = txn.total.to_dict('index')
     txn_dict['month'] = txn.records['month'].max()
-    txn_dict['payment_balance'] = payment_balance
+    txn_dict['payment_balance'] = txn.check_payments()
     txn_dict['category_detail'] = {}
     txn_dict['category'] = {}
 
     for currency in ['CNY', 'USD']:
         try:
             txn_dict['category_detail'][currency] = category_detail.loc[
-                    (currency, datetime.date.today().strftime('%Y-%m'))
-                ].set_index('txn_category').to_dict('index')
+                    (currency, pd.Timestamp('today').strftime('%Y-%m'))
+                ].reset_index().to_dict('record')
             txn_dict['category'][currency] = category.loc[
-                    (currency, datetime.date.today().strftime('%Y-%m'))
+                    (currency, pd.Timestamp('today').strftime('%Y-%m'))
                 ].reset_index().to_dict('record')
         except KeyError:
             logger.warning('No transaction records {}'.format(currency))
 
-    return txn_dict
+    # format hist txn plot
+    txn_hist_plot = txn.format_hist_plot()
+
+    return txn_dict, txn_hist_plot
