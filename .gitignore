@@ -3,6 +3,7 @@
 *.ipynb
 __pycache__/
 .ipynb_checkpoints/
+.Rhistory
 
 # specific data files
 *.xlsx
