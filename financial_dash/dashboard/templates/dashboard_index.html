@@ -21,12 +21,12 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total value</th>
-        <td>&#36; {{ bal.USD.tv }}</td><td></td>
+        <td>&#36; {{ bal.USD.tv|floatformat:2 }}</td><td></td>
       </tr>
       {% for entry in bal.USD.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#36; {{ entry.balance }}</th>
+        <td>&#36; {{ entry.balance|floatformat:2 }}</th>
         <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
       </tr>
       {% endfor %}
@@ -43,12 +43,12 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total value</th>
-        <td>&#36; {{ inv.USD.tv }}</td><td></td>
+        <td>&#36; {{ inv.USD.tv|floatformat:2 }}</td><td></td>
       </tr>
       {% for entry in inv.USD.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#36; {{ entry.balance }}</td>
+        <td>&#36; {{ entry.balance|floatformat:2 }}</td>
         <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
@@ -65,12 +65,12 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total value</th>
-        <td>&#165; {{ bal.CNY.tv }}</td><td></td>
+        <td>&#165; {{ bal.CNY.tv|floatformat:2 }}</td><td></td>
       </tr>
       {% for entry in bal.CNY.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#165; {{ entry.balance }}</td>
+        <td>&#165; {{ entry.balance|floatformat:2 }}</td>
         <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
@@ -87,12 +87,12 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total value</th>
-        <td>&#165; {{ inv.CNY.tv }}</td><td></td>
+        <td>&#165; {{ inv.CNY.tv|floatformat:2 }}</td><td></td>
       </tr>
       {% for entry in inv.CNY.data %}
       <tr>
         <td>{{ entry.account }}</td>
-        <td>&#165; {{ entry.balance }}</td>
+        <td>&#165; {{ entry.balance|floatformat:2 }}</td>
         <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</td>
       </tr>
       {% endfor %}
@@ -113,7 +113,7 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total amount</th>
-        <td colspan="2">&#36; {{ txn.total.USD.total|default:0 }}</td>
+        <td colspan="2">&#36; {{ txn.total.USD.total|default:0|floatformat:2 }}</td>
       </tr>
       {% for entry in txn.category.USD %}
       <tr>
@@ -151,7 +151,7 @@ Dashboard
       </tr>
       <tr style="border-bottom: 1pt solid #DCDFE4;">
         <th>Total amount</th>
-        <td colspan="2">&#165; {{ txn.total.CNY.total|default:0 }}</td>
+        <td colspan="2">&#165; {{ txn.total.CNY.total|default:0|floatformat:2 }}</td>
       </tr>
       {% for entry in txn.category.CNY %}
       <tr>

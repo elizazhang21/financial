@@ -4,7 +4,7 @@ from constants import logger
 
 from db_session import start_session, close_session
 from db_models import InvestmentUSD
-from scrapers import firstrade
+from scrapers import firstrade, cpwm
 
 
 def get_investment(currency):
@@ -13,6 +13,7 @@ def get_investment(currency):
     if currency == 'USD':
         inv_firstrade = firstrade.get_balance('Troy')
         inv_firstrade_dc = firstrade.get_balance('Doris')
+        # inv_cpwm = cpwm.get_balance()
 
         df = pd.DataFrame([{
                 'account': 'Firstrade',
