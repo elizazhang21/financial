@@ -1,4 +1,5 @@
 import pandas as pd
+
 from ..constants import logger
 from .bal_analysis import Balance
 from .inv_analysis import Investment
