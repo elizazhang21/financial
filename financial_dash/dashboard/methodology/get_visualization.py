@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 
 from ..constants import logger
 
@@ -8,6 +9,9 @@ def get_txn_plot(txn_category):
     plot_data = {}
     for currency, records in txn_category.items():
         df = pd.DataFrame(records)
+        if df.empty:
+            continue
+
         df = df.rename(columns={
             'txn_category': 'name',
             'pct': 'y',

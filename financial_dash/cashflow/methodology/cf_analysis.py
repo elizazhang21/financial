@@ -42,7 +42,7 @@ class CashFlow(object):
             'local_tax': local_tax,
         }
         tax['total'] = sum(tax.values())
-        tax['effective'] = tax['total'] / self.annual_income
+        tax['effective'] = tax['total'] / self.annual_income * 100
 
         return tax
 

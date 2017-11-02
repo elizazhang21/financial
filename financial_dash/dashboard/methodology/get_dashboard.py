@@ -55,16 +55,15 @@ def get_transaction_analysis():
 
     for currency in ['CNY', 'USD']:
         try:
-            txn_dict['category_detail'][currency] = category_detail.loc[
+            txn_dict['category_detail'][currency] = category_detail.loc[[
                     (currency, pd.Timestamp('today').strftime('%Y-%m'))
-                ].reset_index().to_dict('record')
-            txn_dict['category'][currency] = category.loc[
+                ]].reset_index().dropna().to_dict('record')
+            txn_dict['category'][currency] = category.loc[[
                     (currency, pd.Timestamp('today').strftime('%Y-%m'))
-                ].reset_index().to_dict('record')
+                ]].reset_index().dropna().to_dict('record')
         except KeyError:
             logger.warning('No transaction records {}'.format(currency))
 
     # format hist txn plot
     txn_hist_plot = txn.format_hist_plot()
-
     return txn_dict, txn_hist_plot
