@@ -53,7 +53,7 @@ function pie_charts(plot_area, data_series, plot_title) {
 
 
 // percentage area plot
-function pct_area(plot_area, data_series, x_axis, plot_title) {
+function line_area(plot_area, data_series, x_axis, plot_title, stacking) {
     chart = Highcharts.chart(plot_area, {
         colors: color_palette,
         chart: {
@@ -81,7 +81,7 @@ function pct_area(plot_area, data_series, x_axis, plot_title) {
         },
         plotOptions: {
             area: {
-                stacking: 'percent',
+                stacking: stacking,
                 lineColor: '#DCDFE4',
                 lineWidth: 1,
                 marker: {
