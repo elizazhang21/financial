@@ -10,7 +10,7 @@ class Logger(object):
             level=logging.DEBUG,
             stream=sys.stdout
         )
-        self.logger = logging.getLogger('FINANCIAL_DASH')
+        self.logger = logging.getLogger('FINANCIAL_CF')
 
     def info(self, msg):
         self.logger.info(msg)

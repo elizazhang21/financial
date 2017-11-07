@@ -183,17 +183,12 @@ Dashboard
 </div><hr/>
 
 
-
-
-<div id="plot-test" style="width: 400px; height: 400px;"></div>
-
 {% endblock %}
 
 
 {% block extra_js %}
 <script src="https://code.highcharts.com/stock/highstock.js"></script>
-<!-- <script src="https://code.highcharts.com/stock/modules/exporting.js"></script> -->
-<script type="text/javascript" src="{% static 'js/plot.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/dashboard/dashboard_plot.js' %}"></script>
 <script type="text/javascript">
   {% if txn.category.USD %}
     pie_charts('txn-plot-USD-category', {{ txn_plot.USD|default:'[]'|safe }}, 'USD Transaction By Category');
