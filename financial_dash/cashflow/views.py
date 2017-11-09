@@ -9,6 +9,13 @@ from .methodology.get_visualization import (
 
 
 def cashflow_index(request):
+    # load cashflow index
+    return render(request, 'cashflow_index.html')
+
+
+def cashflow_panel(request):
+    # parse GET parameters
+
     # get cashflow data
     cf_data = get_cashflow(
         annual_income=125000, monthly_rent=2000, monthly_expense=1200, monthly_consumption=500, annual_return=0.07, periods=20)
@@ -28,4 +35,4 @@ def cashflow_index(request):
         'plot_cons_post': plot_cons_post,
     }
 
-    return render(request, 'cashflow_index.html', render_data)
+    return render(request, 'cashflow_panel.html', render_data)

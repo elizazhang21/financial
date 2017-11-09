@@ -107,3 +107,24 @@ ul.tabs > li > a.active {
 div.summary {
   min-height: 500px !important;
 }
+
+
+/* input parameter area */
+div.parameter {
+  border-right: 3px solid #DCDFE4;
+  min-height: 700px !important;
+}
+
+.input-field {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+input[type=number] {
+  height: 2.5em;
+  margin-bottom: 10px;
+}
+
+.tooltipped {
+  color: #303030 !important;
+}

@@ -1,0 +1,24 @@
+<!-- cashflow projection panel part -->
+{% load static %}
+
+
+<ul class="tabs">
+  <li class="tab col s3"><a href="#plot-cap-growth">by category</a></li>
+  <li class="tab col s3"><a href="#plot-cons-pre" class='active'>by detail</a></li>
+  <li class="tab col s3"><a href="#plot-cons-post">percentage</a></li>
+</ul>
+
+<div id="plot-cap-growth" class="txn-plot"></div>
+<div id="plot-cons-pre" class="txn-plot"></div>
+<div id="plot-cons-post" class="txn-plot"></div>
+
+<script type="text/javascript" src="{% static 'js/cashflow/cashflow_main.js' %}"></script>
+<script type="text/javascript">
+  var cap_growth = {{ plot_cap_growth|safe }};
+  var cons_pre = {{ plot_cons_pre|safe }};
+  var cons_post = {{ plot_cons_post|safe }};
+
+  pie_charts('plot-cons-pre', cons_pre, 'Cashflow Constitution - Tax Included');
+  pie_charts('plot-cons-post', cons_post, 'Cashflow Constitution - Tax Excluded');
+  line_area('plot-cap-growth', cap_growth['series'], cap_growth['x_axis'], 'Capital Growth Projection')
+</script>

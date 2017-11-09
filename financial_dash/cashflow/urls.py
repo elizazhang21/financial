@@ -21,4 +21,5 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', views.cashflow_index, name='cashflow_index'),
+    url(r'panel/', views.cashflow_panel, name='cashflow_panel'),
 ]

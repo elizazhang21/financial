@@ -10,21 +10,74 @@ Cashflow Projection
 {% block content %}
 
 <div class="row">
-  
+  <!-- input area -->
+  <div class="col s12 m3 l3 parameter">
+    <h5>Input Parameters</h5><hr />
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="Pre-tax annual total income" data-html="true">
+        <i class="material-icons left">info_outline</i>Annual Income</a>
+      <input id="annual_income" type="number" class="validate" value="125000">
+      <!-- <label for="annual_income">Annual Income</label> -->
+    </div>
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="Monthly rent" data-html="true">
+        <i class="material-icons left">info_outline</i>Monthly Rent</a>
+      <input id="monthly_rent" type="number" class="validate" value="1550">
+      <!-- <label for="monthly_rent">Monthly Rent</label> -->
+    </div>
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="Monthly expense, including food, transportation, bills, entertainment activities, etc."
+        data-html="true">
+        <i class="material-icons left">info_outline</i>Monthly Expense</a>
+      <input id="monthly_expense" type="number" class="validate" value="1200">
+      <!-- <label for="monthly_expense">Monthly Expense</label> -->
+    </div>
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="All other monthly expenses, including apparel, appliances, etc."
+        data-html="true">
+        <i class="material-icons left">info_outline</i>Monthly Consumption</a>
+      <input id="monthly_consumption" type="number" class="validate" value="200">
+      <!-- <label for="monthly_consumption">Monthly Consumption</label> -->
+    </div>
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="Annualized investment on savings, in unit of %" data-html="true">
+        <i class="material-icons left">info_outline</i>Annual Investment Return (%)</a>
+      <input id="annual_return" type="number" class="validate" value="7.0" step="0.1">
+      <!-- <label for="annual_return">Annual Investment Return</label> -->
+    </div>
+
+    <div class="input-field col s12">
+      <a class="tooltipped" data-position="right" data-delay="50"
+        data-tooltip="Number of years for capital growth projection" data-html="true">
+        <i class="material-icons left">info_outline</i>Projection Periods</a>
+      <input id="n_periods" type="number" class="validate" value="20">
+      <!-- <label for="n_periods">Projection Periods</label> -->
+    </div>
+
+    <div class="input-field col s12" style="text-align: right;">
+      <button class="btn waves-effect waves-light" type="button" name="submit" onclick="load_panel()">
+        Submit<i class="material-icons right">send</i>
+      </button>
+    </div>
+  </div>
+
+
+  <!-- display area -->
+  <div class="col s12 m9 l9" id='cashflow-panel'>
+  </div>
+
 </div><hr/>
 
-
-<div class="col s12 m6 l6">
-  <ul class="tabs">
-    <li class="tab col s3"><a href="#plot-cap-growth">by category</a></li>
-    <li class="tab col s3"><a href="#plot-cons-pre">by detail</a></li>
-    <li class="tab col s3"><a href="#plot-cons-post">percentage</a></li>
-  </ul>
-
-  <div id="plot-cap-growth" class="txn-plot"></div>
-  <div id="plot-cons-pre" class="txn-plot"></div>
-  <div id="plot-cons-post" class="txn-plot"></div>
-</div>
 
 
 {% endblock %}
@@ -35,12 +88,32 @@ Cashflow Projection
 <script type="text/javascript" src="{% static 'js/cashflow/cashflow_main.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/cashflow/cashflow_plot.js' %}"></script>
 <script type="text/javascript">
-  var cap_growth = {{ plot_cap_growth|safe }};
-  var cons_pre = {{ plot_cons_pre|safe }};
-  var cons_post = {{ plot_cons_post|safe }};
+function load_panel() {
+  // get form data
+  var an_inc = document.getElementById('annual_income').value;
+  var mon_rent = document.getElementById('monthly_rent').value;
+  var mon_exp = document.getElementById('monthly_expense').value;
+  var mon_cons = document.getElementById('monthly_consumption').value;
+  var an_ret = document.getElementById('annual_return').value;
+  var periods = document.getElementById('n_periods').value;
 
-  pie_charts('plot-cons-pre', cons_pre, 'Cashflow Constitution - Tax Included');
-  pie_charts('plot-cons-post', cons_post, 'Cashflow Constitution - Tax Excluded');
-  line_area('plot-cap-growth', cap_growth['series'], cap_growth['x_axis'], 'Capital Growth Projection')
+  // AJAX load panel
+  $.ajax({
+    url: '{% url "cashflow_panel" %}',
+    type: 'GET',
+    data: {
+      annual_income: an_inc,
+      monthly_rent: mon_rent,
+      monthly_expense: mon_exp,
+      monthly_consumption: mon_cons,
+      annual_return: an_ret,
+      n_periods: periods,
+    },
+    success: function(data) {
+      $("#cashflow-panel").html(data);
+    }
+  })
+};
+load_panel()
 </script>
 {% endblock %}
