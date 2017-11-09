@@ -2,16 +2,86 @@
 {% load static %}
 
 
+<h5>Cashflow Projection</h5><hr />
+
 <ul class="tabs">
-  <li class="tab col s3"><a href="#plot-cap-growth">by category</a></li>
-  <li class="tab col s3"><a href="#plot-cons-pre" class='active'>by detail</a></li>
-  <li class="tab col s3"><a href="#plot-cons-post">percentage</a></li>
+  <li class="tab col s4"><a href="#decomp-pre" class='active'>pre-tax decomposition</a></li>
+  <li class="tab col s4"><a href="#decomp-post">post-tax decomposition</a></li>
+  <li class="tab col s4"><a href="#plot-cap-growth">capital growth</a></li>
 </ul>
 
-<div id="plot-cap-growth" class="txn-plot"></div>
-<div id="plot-cons-pre" class="txn-plot"></div>
-<div id="plot-cons-post" class="txn-plot"></div>
+<!-- pre-tax decomposition -->
+<div class="row" id="decomp-pre">
+  <!-- data table -->
+  <div class="col s12 m6 l5">
+    <table class="highlight">
+      <tr>
+        <th>Total tax</th>
+        <td>&#36; {{ tax.total|floatformat:2 }}</td><td></td>
+      </tr>
+      <tr>
+        <th>Effective tax rate</th>
+        <td>{{ tax.effective|floatformat:2 }} %</td><td></td>
+      </tr>
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total disposable</th>
+        <td>&#36; {{ disposable|floatformat:2 }}</td><td></td>
+      </tr>
 
+      {% for entry in cons_pre_tax %}
+      <tr>
+        <td>{{ entry.item }}</td>
+        <td>&#36; {{ entry.value|floatformat:2 }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- plot -->
+  <div class="col s12 m6 l7">
+    <div id="plot-cons-pre" class="txn-plot"></div>
+  </div>
+
+  <div class="col s12 m12 l12" style="border-bottom: 1pt solid #DCDFE4;"></div>
+</div>
+
+
+<!-- post-tax decomposition -->
+<div class="row" id="decomp-post">
+  <!-- data table -->
+  <div class="col s12 m6 l5">
+    <table class="highlight">
+      <tr style="border-bottom: 1pt solid #DCDFE4;">
+        <th>Total disposable</th>
+        <td>&#36; {{ disposable|floatformat:2 }}</td><td></td>
+      </tr>
+
+      {% for entry in cons_post_tax %}
+      <tr>
+        <td>{{ entry.item }}</td>
+        <td>&#36; {{ entry.value|floatformat:2 }}</th>
+        <td style="text-align: right;">{{ entry.pct|floatformat:2 }} %</th>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <!-- plot -->
+  <div class="col s12 m6 l7">
+    <div id="plot-cons-post" class="txn-plot"></div>
+  </div>
+
+  <div class="col s12 m12 l12" style="border-bottom: 1pt solid #DCDFE4;"></div>
+</div>
+
+
+<!-- capital growth -->
+<div id="plot-cap-growth" class="txn-plot"></div>
+
+
+
+<!-- highcharts plot -->
 <script type="text/javascript" src="{% static 'js/cashflow/cashflow_main.js' %}"></script>
 <script type="text/javascript">
   var cap_growth = {{ plot_cap_growth|safe }};

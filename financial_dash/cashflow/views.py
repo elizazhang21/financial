@@ -15,10 +15,21 @@ def cashflow_index(request):
 
 def cashflow_panel(request):
     # parse GET parameters
+    annual_income = float(request.GET['annual_income'])
+    monthly_rent = float(request.GET['monthly_rent'])
+    monthly_expense = float(request.GET['monthly_expense'])
+    monthly_consumption = float(request.GET['monthly_consumption'])
+    annual_return = float(request.GET['annual_return']) / 100
+    n_periods = float(request.GET['n_periods'])
 
     # get cashflow data
     cf_data = get_cashflow(
-        annual_income=125000, monthly_rent=2000, monthly_expense=1200, monthly_consumption=500, annual_return=0.07, periods=20)
+        annual_income=annual_income,
+        monthly_rent=monthly_rent,
+        monthly_expense=monthly_expense,
+        monthly_consumption=monthly_consumption,
+        annual_return=annual_return,
+        periods=n_periods)
 
     # format plot data
     plot_cap_growth = get_cap_growth_plot(cf_data['cap_growth'])
@@ -30,6 +41,7 @@ def cashflow_panel(request):
         'tax': cf_data['tax'],
         'disposable': cf_data['disposable'],
         'cons_pre_tax': cf_data['cons_pre_tax'].to_dict('record'),
+        'cons_post_tax': cf_data['cons_post_tax'].to_dict('record'),
         'plot_cap_growth': plot_cap_growth,
         'plot_cons_pre': plot_cons_pre,
         'plot_cons_post': plot_cons_post,

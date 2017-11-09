@@ -105,14 +105,14 @@ ul.tabs > li > a.active {
 
 /* summary tables */
 div.summary {
-  min-height: 500px !important;
+  min-height: 350px !important;
 }
 
 
 /* input parameter area */
 div.parameter {
   border-right: 3px solid #DCDFE4;
-  min-height: 700px !important;
+  min-height: 600px !important;
 }
 
 .input-field {
@@ -127,4 +127,11 @@ input[type=number] {
 
 .tooltipped {
   color: #303030 !important;
+}
+
+
+/* table padding */
+th, td {
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
